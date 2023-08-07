@@ -39,24 +39,24 @@ export default function FormPage() {
       } catch (error) {
         console.log(error);
       }
-    }
+    } else {
+      try {
+        const res = await fetch("/api/tasks", {
+          method: "POST",
+          body: JSON.stringify(newTask),
+          headers: {
+            "Content-Type": "application/json",
+          },
+        });
+        const data = await res.json();
 
-    try {
-      const res = await fetch("/api/tasks", {
-        method: "POST",
-        body: JSON.stringify(newTask),
-        headers: {
-          "Content-Type": "application/json",
-        },
-      });
-      const data = await res.json();
-
-      if (res.status === 200) {
-        router.push("/");
-        router.refresh();
+        if (res.status === 200) {
+          router.push("/");
+          router.refresh();
+        }
+      } catch (error) {
+        console.log(error);
       }
-    } catch (error) {
-      console.log(error);
     }
   };
 
