@@ -21,6 +21,26 @@ export default function FormPage() {
   const handleSubmit = async (e) => {
     e.preventDefault();
 
+    if (params.id) {
+      try {
+        const res = await fetch(`/api/tasks/${params.id}`, {
+          method: "PUT",
+          body: JSON.stringify(newTask),
+          headers: {
+            "Content-Type": "application/json",
+          },
+        });
+        const data = await res.json();
+
+        if (res.status === 200) {
+          router.push("/");
+          router.refresh();
+        }
+      } catch (error) {
+        console.log(error);
+      }
+    }
+
     try {
       const res = await fetch("/api/tasks", {
         method: "POST",
