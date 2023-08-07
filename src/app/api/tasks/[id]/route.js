@@ -58,10 +58,32 @@ export async function PUT(req, {params}) {
   }
 }
 
-export function DELETE(req, res) {
-  const {
-    params: {id},
-  } = res;
+export async function DELETE(req, {params}) {
+  try {
+    const deletedTask = await Task.findByIdAndDelete(params.id);
 
-  return NextResponse.json({message: "eliminando tarea " + id});
+    if (!deletedTask) {
+      return NextResponse.json(
+        {
+          error: true,
+          message: "Task not found",
+        },
+        {
+          status: 404,
+        }
+      );
+    }
+
+    return NextResponse.json(deletedTask);
+  } catch (error) {
+    return NextResponse.json(
+      {
+        error: true,
+        message: error.message,
+      },
+      {
+        status: 400,
+      }
+    );
+  }
 }
