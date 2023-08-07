@@ -2,6 +2,7 @@ import {NextResponse} from "next/server";
 import {connectDB} from "@/utils/mongoose";
 import Task from "@/models/Task";
 
+// Get all tasks
 export async function GET() {
   connectDB();
 
@@ -10,6 +11,7 @@ export async function GET() {
   return NextResponse.json(tasks);
 }
 
+// Create new task
 export async function POST(req) {
   try {
     const data = await req.json();
