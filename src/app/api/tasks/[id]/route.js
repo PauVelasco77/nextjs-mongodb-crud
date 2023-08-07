@@ -36,12 +36,26 @@ export async function GET(req, {params}) {
   }
 }
 
-export function PUT(req, res) {
-  const {
-    params: {id},
-  } = res;
+export async function PUT(req, {params}) {
+  try {
+    const data = await req.json();
 
-  return NextResponse.json({message: "actualizando tarea " + id});
+    const updatedTask = await Task.findByIdAndUpdate(params.id, data, {
+      new: true,
+    });
+
+    return NextResponse.json(updatedTask);
+  } catch (error) {
+    return NextResponse.json(
+      {
+        error: true,
+        message: error.message,
+      },
+      {
+        status: 400,
+      }
+    );
+  }
 }
 
 export function DELETE(req, res) {
