@@ -10,6 +10,23 @@ export async function GET() {
   return NextResponse.json(tasks);
 }
 
-export function POST() {
-  return NextResponse.json({message: "creando tarea"});
+export async function POST(req) {
+  try {
+    const data = await req.json();
+
+    const newTask = new Task(data);
+    const savedTask = await newTask.save();
+
+    return NextResponse.json(savedTask);
+  } catch (error) {
+    return NextResponse.json(
+      {
+        error: true,
+        message: error.message,
+      },
+      {
+        status: 400,
+      }
+    );
+  }
 }
