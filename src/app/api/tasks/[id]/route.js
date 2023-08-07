@@ -1,25 +1,89 @@
 import {NextResponse} from "next/server";
+import {connectDB} from "@/utils/mongoose";
+import Task from "@/models/Task";
 
-export function GET(req, res) {
-  const {
-    params: {id},
-  } = res;
+export async function GET(req, {params}) {
+  connectDB();
+  const validId = params.id;
 
-  return NextResponse.json({message: "obteniendo tarea " + id});
+  try {
+    const task = await Task.findById(validId);
+
+    if (!task) {
+      console.log("Tarea no encontrada");
+      return NextResponse.json(
+        {
+          error: true,
+          message: "Task not found",
+        },
+        {
+          status: 404,
+        }
+      );
+    }
+
+    return NextResponse.json(task);
+  } catch (error) {
+    return NextResponse.json(
+      {
+        error: true,
+        message: error.message,
+      },
+      {
+        status: 400,
+      }
+    );
+  }
 }
 
-export function PUT(req, res) {
-  const {
-    params: {id},
-  } = res;
+export async function PUT(req, {params}) {
+  try {
+    const data = await req.json();
 
-  return NextResponse.json({message: "actualizando tarea " + id});
+    const updatedTask = await Task.findByIdAndUpdate(params.id, data, {
+      new: true,
+    });
+
+    return NextResponse.json(updatedTask);
+  } catch (error) {
+    return NextResponse.json(
+      {
+        error: true,
+        message: error.message,
+      },
+      {
+        status: 400,
+      }
+    );
+  }
 }
 
-export function DELETE(req, res) {
-  const {
-    params: {id},
-  } = res;
+export async function DELETE(req, {params}) {
+  try {
+    const deletedTask = await Task.findByIdAndDelete(params.id);
 
-  return NextResponse.json({message: "eliminando tarea " + id});
+    if (!deletedTask) {
+      return NextResponse.json(
+        {
+          error: true,
+          message: "Task not found",
+        },
+        {
+          status: 404,
+        }
+      );
+    }
+
+    return NextResponse.json(deletedTask);
+  } catch (error) {
+    return NextResponse.json(
+      {
+        error: true,
+        message: error.message,
+      },
+      {
+        status: 400,
+      }
+    );
+  }
 }
