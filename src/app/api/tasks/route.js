@@ -1,7 +1,13 @@
 import {NextResponse} from "next/server";
+import {connectDB} from "@/utils/mongoose";
+import Task from "@/models/Task";
 
-export function GET() {
-  return NextResponse.json({message: "obteniendo tareas"});
+export async function GET() {
+  connectDB();
+
+  const tasks = await Task.find();
+
+  return NextResponse.json(tasks);
 }
 
 export function POST() {
