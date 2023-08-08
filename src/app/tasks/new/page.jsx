@@ -30,7 +30,7 @@ export default function FormPage () {
             'Content-Type': 'application/json'
           }
         })
-        const data = await res.json()
+        await res.json()
 
         if (res.status === 200) {
           router.push('/')
@@ -48,7 +48,7 @@ export default function FormPage () {
             'Content-Type': 'application/json'
           }
         })
-        const data = await res.json()
+        await res.json()
 
         if (res.status === 200) {
           router.push('/')
@@ -67,7 +67,7 @@ export default function FormPage () {
       const res = await fetch(`/api/tasks/${params.id}`, {
         method: 'DELETE'
       })
-      const data = await res.json()
+      await res.json()
 
       if (res.status === 200) {
         router.push('/')
