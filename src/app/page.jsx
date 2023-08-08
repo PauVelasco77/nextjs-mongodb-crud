@@ -1,7 +1,7 @@
 import TaskCard from '@/components/TaskCard'
 
 export async function loadTasks () {
-  const res = await fetch(`${process.env.NEXT_PUBLIC_BASE_URL}/api/tasks`, {
+  const res = await fetch(`${process.env.NEXT_PUBLIC_API_URL}/api/tasks`, {
     next: {
       revalidate: 60 // every 10 seconds revalidate the data from the server and update the cache with the new data
     }
