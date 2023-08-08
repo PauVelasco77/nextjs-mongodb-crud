@@ -41,7 +41,7 @@ export default function FormPage () {
       }
     } else {
       try {
-        const res = await fetch('${process.env.NEXT_PUBLIC_BASE_URL}/api/tasks', {
+        const res = await fetch(`${process.env.NEXT_PUBLIC_BASE_URL}/api/tasks`, {
           method: 'POST',
           body: JSON.stringify(newTask),
           headers: {
