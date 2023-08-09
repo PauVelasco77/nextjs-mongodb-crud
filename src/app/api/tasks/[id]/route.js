@@ -3,7 +3,7 @@ import { connectDB } from '@/utils/mongoose'
 import Task from '@/models/Task'
 
 export async function GET (req, { params }) {
-  connectDB()
+  await connectDB()
   const validId = params.id
 
   try {
