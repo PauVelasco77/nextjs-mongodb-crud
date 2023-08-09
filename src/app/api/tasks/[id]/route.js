@@ -11,14 +11,20 @@ export async function GET (req, res) {
     optionsSuccessStatus: 200 // some legacy browsers (IE11, various SmartTVs) choke on 204
   })
   console.log('GET')
-  return new Response('Hello, Next.js!', {
-    status: 200,
-    headers: {
-      'Access-Control-Allow-Origin': '*',
-      'Access-Control-Allow-Methods': 'GET, POST, PUT, DELETE, OPTIONS',
-      'Access-Control-Allow-Headers': 'Content-Type, Authorization'
-    }
+  return NextResponse.json({
+    // task
+    id: '1',
+    title: 'Tarea 1',
+    description: 'Descripcion de la tarea 1'
   })
+  // return new Response('Hello, Next.js!', {
+  //   status: 200,
+  //   headers: {
+  //     'Access-Control-Allow-Origin': '*',
+  //     'Access-Control-Allow-Methods': 'GET, POST, PUT, DELETE, OPTIONS',
+  //     'Access-Control-Allow-Headers': 'Content-Type, Authorization'
+  //   }
+  // })
 }
 
 // export async function GET (req, { params }) {
