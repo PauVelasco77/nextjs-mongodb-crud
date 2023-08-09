@@ -1,7 +1,7 @@
 import TaskCard from '@/components/TaskCard'
 
 export async function loadTasks () {
-  const res = await fetch(`${process.env.NEXT_PUBLIC_API_URL}/api/tasks`, {
+  const res = await fetch(`${process.env.NEXT_PUBLIC_VERCEL_URL}/api/tasks`, {
     next: {
       tags: ['tasks']
     }
