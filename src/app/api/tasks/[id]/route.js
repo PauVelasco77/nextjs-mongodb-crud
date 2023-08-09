@@ -1,8 +1,15 @@
+import NextCors from 'nextjs-cors'
 import { NextResponse } from 'next/server'
 // import { connectDB } from '@/utils/mongoose'
 import Task from '@/models/Task'
 
-export async function GET (request) {
+export async function GET (req, res) {
+  await NextCors(req, res, {
+    // Options
+    methods: ['GET', 'HEAD', 'PUT', 'PATCH', 'POST', 'DELETE'],
+    origin: '*',
+    optionsSuccessStatus: 200 // some legacy browsers (IE11, various SmartTVs) choke on 204
+  })
   console.log('GET')
   return new Response('Hello, Next.js!', {
     status: 200,
