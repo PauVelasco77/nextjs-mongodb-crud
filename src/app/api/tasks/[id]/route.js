@@ -34,7 +34,14 @@ export async function GET (req, { params }) {
   //     }
   //   )
   // }
-  return NextResponse.json({ message: 'Hello' })
+  return NextResponse.json({ message: 'Hello' }, {
+    status: 200,
+    headers: {
+      'Access-Control-Allow-Origin': '*',
+      'Access-Control-Allow-Methods': 'GET, POST, PUT, DELETE, OPTIONS',
+      'Access-Control-Allow-Headers': 'Content-Type, Authorization'
+    }
+  })
 }
 
 export async function PUT (req, { params }) {
