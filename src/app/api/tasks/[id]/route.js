@@ -1,4 +1,3 @@
-import NextCors from 'nextjs-cors'
 import { NextResponse } from 'next/server'
 import { connectDB } from '@/utils/mongoose'
 import Task from '@/models/Task'
