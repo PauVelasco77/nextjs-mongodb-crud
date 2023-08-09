@@ -27,7 +27,14 @@ export default function FormPage () {
           method: 'PUT',
           body: JSON.stringify(newTask),
           headers: {
-            'Content-Type': 'application/json'
+            'Content-Type': 'application/json',
+            // cors
+            'Access-Control-Allow-Credentials': 'true',
+            'Access-Control-Allow-Origin': '*',
+            'Access-Control-Allow-Methods': 'GET,DELETE,PATCH,POST,PUT',
+            'Access-Control-Allow-Headers':
+              'X-CSRF-Token, X-Requested-With, Accept, Accept-Version, Content-Length, Content-MD5, Content-Type, Date, X-Api-Version'
+
           }
         })
         await res.json()
@@ -94,7 +101,19 @@ export default function FormPage () {
 
   useEffect(() => {
     if (params.id) {
-      fetch(`${process.env.NEXT_PUBLIC_API_URL}/api/tasks/${params.id}`)
+      fetch(`${process.env.NEXT_PUBLIC_API_URL}/api/tasks/${params.id}`, {
+        method: 'GET',
+        headers: {
+          'Content-Type': 'application/json',
+          // cors
+          'Access-Control-Allow-Credentials': 'true',
+          'Access-Control-Allow-Origin': '*',
+          'Access-Control-Allow-Methods': 'GET,DELETE,PATCH,POST,PUT',
+          'Access-Control-Allow-Headers':
+            'X-CSRF-Token, X-Requested-With, Accept, Accept-Version, Content-Length, Content-MD5, Content-Type, Date, X-Api-Version'
+
+        }
+      })
         .then((res) => res.json())
         .then((data) => {
           setNewTask(data)
