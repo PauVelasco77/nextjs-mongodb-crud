@@ -23,7 +23,7 @@ export default function FormPage () {
 
     if (params.id) {
       try {
-        const res = await fetch(`${process.env.NEXT_PUBLIC_VERCEL_URL}/api/tasks/${params.id}`, {
+        const res = await fetch(`${process.env.NEXT_PUBLIC_API_URL}/api/tasks/${params.id}`, {
           method: 'PUT',
           body: JSON.stringify(newTask),
           headers: {
@@ -41,7 +41,7 @@ export default function FormPage () {
 
         if (res.status === 200) {
           router.push('/')
-          await fetch(`${process.env.NEXT_PUBLIC_VERCEL_URL}/api/refresh`, {
+          await fetch(`${process.env.NEXT_PUBLIC_API_URL}/api/refresh`, {
             method: 'POST',
             body: JSON.stringify({ tag: 'tasks' }),
             headers: {
@@ -55,7 +55,7 @@ export default function FormPage () {
       }
     } else {
       try {
-        const res = await fetch(`${process.env.NEXT_PUBLIC_VERCEL_URL}/api/tasks`, {
+        const res = await fetch(`${process.env.NEXT_PUBLIC_API_URL}/api/tasks`, {
           method: 'POST',
           body: JSON.stringify(newTask),
           headers: {
@@ -66,7 +66,7 @@ export default function FormPage () {
 
         if (res.status === 200) {
           router.push('/')
-          await fetch(`${process.env.NEXT_PUBLIC_VERCEL_URL}/api/refresh`, {
+          await fetch(`${process.env.NEXT_PUBLIC_API_URL}/api/refresh`, {
             method: 'POST',
             body: JSON.stringify({ tag: 'tasks' }),
             headers: {
@@ -85,7 +85,7 @@ export default function FormPage () {
     e.preventDefault()
 
     try {
-      const res = await fetch(`${process.env.NEXT_PUBLIC_VERCEL_URL}/api/tasks/${params.id}`, {
+      const res = await fetch(`${process.env.NEXT_PUBLIC_API_URL}/api/tasks/${params.id}`, {
         method: 'DELETE'
       })
       await res.json()
@@ -101,7 +101,7 @@ export default function FormPage () {
 
   useEffect(() => {
     if (params.id) {
-      fetch(`${process.env.NEXT_PUBLIC_VERCEL_URL}/api/tasks/${params.id}`, {
+      fetch(`${process.env.NEXT_PUBLIC_API_URL}/api/tasks/${params.id}`, {
         method: 'GET',
         headers: {
           'Content-Type': 'application/json',
