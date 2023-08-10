@@ -3,7 +3,7 @@
 import { useEffect, useState } from 'react'
 import { useParams, useRouter } from 'next/navigation'
 
-const api = `http://${process.env.NEXT_PUBLIC_VERCEL_URL}`
+const api = `http://${process.env.API_URL}`
 
 export default function FormPage () {
   const router = useRouter()

@@ -1,6 +1,6 @@
 import TaskCard from '@/components/TaskCard'
 
-const api = `http://${process.env.NEXT_PUBLIC_VERCEL_URL}`
+const api = `http://${process.env.API_URL}`
 
 export async function loadTasks () {
   const res = await fetch(`${api}/api/tasks`, {
