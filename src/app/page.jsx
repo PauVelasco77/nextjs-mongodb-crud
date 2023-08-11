@@ -1,24 +1,16 @@
 'use client'
 
 import TaskCard from '@/components/TaskCard'
-import { API_URL } from '@/constants'
+import useApi from '@/hooks/useApi'
 import { useEffect, useState } from 'react'
-
-export async function loadTasks () {
-  const res = await fetch(`${API_URL}/tasks`, {
-    next: {
-      tags: ['tasks']
-    }
-  })
-  const data = await res.json()
-  return data
-}
 
 export default function HomePage () {
   const [tasks, setTasks] = useState([])
+  const { getAllTasks } = useApi()
+
   useEffect(() => {
-    loadTasks().then((data) => setTasks(data)).catch((error) => console.log(error))
-  }, [])
+    getAllTasks().then((data) => setTasks(data)).catch((error) => { throw new Error(error) })
+  }, [getAllTasks])
 
   return (
     <div>
