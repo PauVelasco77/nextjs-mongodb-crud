@@ -1,24 +1,10 @@
 'use client'
 
 import TaskCard from '@/components/TaskCard'
-import { API_URL } from '@/constants'
-import { useEffect, useState } from 'react'
-
-export async function loadTasks () {
-  const res = await fetch(`${API_URL}/tasks`, {
-    next: {
-      tags: ['tasks']
-    }
-  })
-  const data = await res.json()
-  return data
-}
+import useHomePage from '@/hooks/useHomePage'
 
 export default function HomePage () {
-  const [tasks, setTasks] = useState([])
-  useEffect(() => {
-    loadTasks().then((data) => setTasks(data)).catch((error) => console.log(error))
-  }, [])
+  const { tasks } = useHomePage()
 
   return (
     <div>
