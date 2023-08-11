@@ -2,7 +2,6 @@
 
 import { useEffect, useState } from 'react'
 import { useParams, useRouter } from 'next/navigation'
-import { API_URL } from '@/constants'
 import useApi from '@/hooks/useApi'
 
 export default function FormPage () {
