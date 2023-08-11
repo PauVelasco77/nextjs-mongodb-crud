@@ -4,7 +4,7 @@ import Task from '@/models/Task'
 
 // Get all tasks
 export async function GET () {
-  connectDB()
+  await connectDB()
 
   const tasks = await Task.find()
 
