@@ -10,7 +10,7 @@ export async function loadTasks () {
   // })
   // const data = await res.json()
   // return data
-
+  console.log('LOAD TASKS', process.env.NEXT_PUBLIC_API_URL)
   await connectDB()
   const tasks = await Task.find()
   // console.log('TAAASKS', tasks)
