@@ -83,5 +83,20 @@ export default function useApi () {
     }
   }, [])
 
-  return { getAllTasks, getTaskById, createTask, updateTask }
+  const deleteTask = useCallback(async (id) => {
+    try {
+      const res = await fetch(`${API_URL}/tasks/${id}`, {
+        method: 'DELETE'
+      })
+      await res.json()
+
+      if (res.status === 200) {
+        return true
+      }
+    } catch (error) {
+      throw new Error(error)
+    }
+  }, [])
+
+  return { getAllTasks, getTaskById, createTask, updateTask, deleteTask }
 }

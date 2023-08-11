@@ -12,7 +12,7 @@ export default function FormPage () {
     title: '',
     description: ''
   })
-  const { getAllTasks, getTaskById, createTask, updateTask } = useApi()
+  const { deleteTask, getTaskById, createTask, updateTask } = useApi()
 
   const handleChange = (e) => {
     setNewTask({
@@ -38,18 +38,9 @@ export default function FormPage () {
   const handleDelete = async (e) => {
     e.preventDefault()
 
-    try {
-      const res = await fetch(`${API_URL}/tasks/${params.id}`, {
-        method: 'DELETE'
-      })
-      await res.json()
-
-      if (res.status === 200) {
-        router.push('/')
-      }
-    } catch (error) {
-      console.log(error)
-    }
+    deleteTask(params.id)
+      .then((data) => router.push('/'))
+      .catch((error) => { throw new Error(error) })
   }
 
   useEffect(() => {
