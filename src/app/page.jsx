@@ -1,13 +1,20 @@
 import TaskCard from '@/components/TaskCard'
+import Task from '@/models/Task'
+import { connectDB } from '@/utils/mongoose'
 
 export async function loadTasks () {
-  const res = await fetch(`${process.env.NEXT_PUBLIC_API_URL}/api/tasks`, {
-    next: {
-      tags: ['tasks']
-    }
-  })
-  const data = await res.json()
-  return data
+  // const res = await fetch(`http://${process.env.NEXT_PUBLIC_API_URL}/api/tasks`, {
+  //   next: {
+  //     tags: ['tasks']
+  //   }
+  // })
+  // const data = await res.json()
+  // return data
+
+  await connectDB()
+  const tasks = await Task.find()
+  // console.log('TAAASKS', tasks)
+  return tasks
 }
 
 export default async function HomePage () {
