@@ -2,6 +2,7 @@
 
 import { useEffect, useState } from 'react'
 import { useParams, useRouter } from 'next/navigation'
+import { API_URL } from '@/constants'
 
 export default function FormPage () {
   const router = useRouter()
@@ -23,7 +24,7 @@ export default function FormPage () {
 
     if (params.id) {
       try {
-        const res = await fetch(`${process.env.NEXT_PUBLIC_API_URL}/api/tasks/${params.id}`, {
+        const res = await fetch(`${API_URL}/tasks/${params.id}`, {
           method: 'PUT',
           body: JSON.stringify(newTask),
           headers: {
@@ -34,7 +35,7 @@ export default function FormPage () {
 
         if (res.status === 200) {
           router.push('/')
-          await fetch(`${process.env.NEXT_PUBLIC_API_URL}/api/refresh`, {
+          await fetch(`${API_URL}/refresh`, {
             method: 'POST',
             body: JSON.stringify({ tag: 'tasks' }),
             headers: {
@@ -48,7 +49,7 @@ export default function FormPage () {
       }
     } else {
       try {
-        const res = await fetch(`${process.env.NEXT_PUBLIC_API_URL}/api/tasks`, {
+        const res = await fetch(`${API_URL}/tasks`, {
           method: 'POST',
           body: JSON.stringify(newTask),
           headers: {
@@ -59,14 +60,6 @@ export default function FormPage () {
 
         if (res.status === 200) {
           router.push('/')
-          await fetch(`${process.env.NEXT_PUBLIC_API_URL}/api/refresh`, {
-            method: 'POST',
-            body: JSON.stringify({ tag: 'tasks' }),
-            headers: {
-              'Content-Type': 'application/json'
-            }
-          })
-          router.refresh()
         }
       } catch (error) {
         console.log(error)
@@ -78,14 +71,13 @@ export default function FormPage () {
     e.preventDefault()
 
     try {
-      const res = await fetch(`${process.env.NEXT_PUBLIC_API_URL}/api/tasks/${params.id}`, {
+      const res = await fetch(`${API_URL}/tasks/${params.id}`, {
         method: 'DELETE'
       })
       await res.json()
 
       if (res.status === 200) {
         router.push('/')
-        // router.refresh()
       }
     } catch (error) {
       console.log(error)
@@ -94,7 +86,7 @@ export default function FormPage () {
 
   useEffect(() => {
     if (params.id) {
-      fetch(`${process.env.NEXT_PUBLIC_API_URL}/api/tasks/${params.id}`)
+      fetch(`${API_URL}/tasks/${params.id}`)
         .then((res) => res.json())
         .then((data) => {
           setNewTask(data)
