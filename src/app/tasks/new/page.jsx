@@ -10,7 +10,8 @@ export default function FormPage () {
     title: '',
     description: ''
   })
-
+  const protocol = process.env.NEXT_PUBLIC_VERCEL_ENV === 'development' ? 'http' : 'https'
+  console.log('PROTOCOL', protocol)
   const handleChange = (e) => {
     setNewTask({
       ...newTask,
@@ -23,7 +24,7 @@ export default function FormPage () {
 
     if (params.id) {
       try {
-        const res = await fetch(`https://${process.env.NEXT_PUBLIC_VERCEL_URL}/api/tasks/${params.id}`, {
+        const res = await fetch(`${protocol}://${process.env.NEXT_PUBLIC_VERCEL_URL}/api/tasks/${params.id}`, {
           method: 'PUT',
           body: JSON.stringify(newTask),
           headers: {
@@ -48,7 +49,7 @@ export default function FormPage () {
       }
     } else {
       try {
-        const res = await fetch(`https://${process.env.NEXT_PUBLIC_VERCEL_URL}/api/tasks`, {
+        const res = await fetch(`${protocol}://${process.env.NEXT_PUBLIC_VERCEL_URL}/api/tasks`, {
           method: 'POST',
           body: JSON.stringify(newTask),
           headers: {
@@ -78,7 +79,7 @@ export default function FormPage () {
     e.preventDefault()
 
     try {
-      const res = await fetch(`https://${process.env.NEXT_PUBLIC_VERCEL_URL}/api/tasks/${params.id}`, {
+      const res = await fetch(`${protocol}://${process.env.NEXT_PUBLIC_VERCEL_URL}/api/tasks/${params.id}`, {
         method: 'DELETE'
       })
       await res.json()
@@ -94,13 +95,13 @@ export default function FormPage () {
 
   useEffect(() => {
     if (params.id) {
-      fetch(`https://${process.env.NEXT_PUBLIC_VERCEL_URL}/api/tasks/${params.id}`)
+      fetch(`${protocol}://${process.env.NEXT_PUBLIC_VERCEL_URL}/api/tasks/${params.id}`)
         .then((res) => res.json())
         .then((data) => {
           setNewTask(data)
         })
     }
-  }, [params.id])
+  }, [params.id, protocol])
 
   return (
     <div className='h-[calc(100vh-7rem)] flex justify-center items-center'>
