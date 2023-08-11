@@ -3,6 +3,7 @@
 import { useEffect, useState } from 'react'
 import { useParams, useRouter } from 'next/navigation'
 import { API_URL } from '@/constants'
+import useApi from '@/hooks/useApi'
 
 export default function FormPage () {
   const router = useRouter()
@@ -11,6 +12,7 @@ export default function FormPage () {
     title: '',
     description: ''
   })
+  const { getAllTasks, getTaskById, createTask, updateTask } = useApi()
 
   const handleChange = (e) => {
     setNewTask({
@@ -23,47 +25,13 @@ export default function FormPage () {
     e.preventDefault()
 
     if (params.id) {
-      try {
-        const res = await fetch(`${API_URL}/tasks/${params.id}`, {
-          method: 'PUT',
-          body: JSON.stringify(newTask),
-          headers: {
-            'Content-Type': 'application/json'
-          }
-        })
-        await res.json()
-
-        if (res.status === 200) {
-          router.push('/')
-          await fetch(`${API_URL}/refresh`, {
-            method: 'POST',
-            body: JSON.stringify({ tag: 'tasks' }),
-            headers: {
-              'Content-Type': 'application/json'
-            }
-          })
-          router.refresh()
-        }
-      } catch (error) {
-        console.log(error)
-      }
+      updateTask(newTask)
+        .then((data) => router.push('/'))
+        .catch((error) => { throw new Error(error) })
     } else {
-      try {
-        const res = await fetch(`${API_URL}/tasks`, {
-          method: 'POST',
-          body: JSON.stringify(newTask),
-          headers: {
-            'Content-Type': 'application/json'
-          }
-        })
-        await res.json()
-
-        if (res.status === 200) {
-          router.push('/')
-        }
-      } catch (error) {
-        console.log(error)
-      }
+      createTask(newTask)
+        .then((data) => router.push('/'))
+        .catch((error) => { throw new Error(error) })
     }
   }
 
@@ -86,13 +54,12 @@ export default function FormPage () {
 
   useEffect(() => {
     if (params.id) {
-      fetch(`${API_URL}/tasks/${params.id}`)
-        .then((res) => res.json())
+      getTaskById(params.id)
         .then((data) => {
           setNewTask(data)
         })
     }
-  }, [params.id])
+  }, [params.id, getTaskById])
 
   return (
     <div className='h-[calc(100vh-7rem)] flex justify-center items-center'>
