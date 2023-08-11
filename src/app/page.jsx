@@ -1,16 +1,10 @@
 'use client'
 
 import TaskCard from '@/components/TaskCard'
-import useApi from '@/hooks/useApi'
-import { useEffect, useState } from 'react'
+import useHomePage from '@/hooks/useHomePage'
 
 export default function HomePage () {
-  const [tasks, setTasks] = useState([])
-  const { getAllTasks } = useApi()
-
-  useEffect(() => {
-    getAllTasks().then((data) => setTasks(data)).catch((error) => { throw new Error(error) })
-  }, [getAllTasks])
+  const { tasks } = useHomePage()
 
   return (
     <div>
