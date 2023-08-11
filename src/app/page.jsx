@@ -1,10 +1,11 @@
 'use client'
 
 import TaskCard from '@/components/TaskCard'
+import { API_URL } from '@/constants'
 import { useEffect, useState } from 'react'
 
 export async function loadTasks () {
-  const res = await fetch(`${process.env.NEXT_PUBLIC_API_URL}/api/tasks`, {
+  const res = await fetch(`${API_URL}/tasks`, {
     next: {
       tags: ['tasks']
     }
@@ -23,9 +24,12 @@ export default function HomePage () {
     <div>
       <h1>Home Page</h1>
       <div className='grid grid-cols-3 gap-2'>
-        {tasks.map((task) => (
-          <TaskCard task={task} key={task.id} />
-        ))}
+        {tasks.map((task) => {
+          console.log(task.id)
+          return (
+            <TaskCard task={task} key={task.id} />
+          )
+        })}
       </div>
     </div>
   )
