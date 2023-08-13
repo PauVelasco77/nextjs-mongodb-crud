@@ -10,7 +10,6 @@ export async function GET (req, { params }) {
     const task = await Task.findById(validId)
 
     if (!task) {
-      console.log('Tarea no encontrada')
       return NextResponse.json(
         {
           error: true,
