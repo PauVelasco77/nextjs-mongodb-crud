@@ -12,6 +12,7 @@ export const metadata = {
 export default function RootLayout ({ children }) {
   return (
     <html lang='en'>
+      <title>Todo list + MongoDB API</title>
       <body className={inter.className}>
         <header>
           <NavBar />
