@@ -17,7 +17,15 @@ export default function RootLayout ({ children }) {
         <header>
           <NavBar />
         </header>
-        <main className='container mx-auto px-5 mt-4'>{children}</main>
+        <main className='container mx-auto px-5 mt-4'>
+          <div className='first'>
+            <div className='second'>
+              {/* <div className='third'> */}
+              {children}
+            </div>
+          </div>
+          {/* </div> */}
+        </main>
       </body>
     </html>
   )
