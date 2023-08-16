@@ -48,6 +48,7 @@ export default function FormPage () {
         .then((data) => {
           setNewTask(data)
         })
+        .catch((error) => { throw new Error(error) })
     }
   }, [params.id, getTaskById])
 
