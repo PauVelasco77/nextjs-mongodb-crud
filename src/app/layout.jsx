@@ -1,6 +1,7 @@
 import NavBar from '@/components/NavBar'
 import './globals.css'
 import { Inter } from 'next/font/google'
+import MobileLayout from '@/components/MobileLayout'
 
 const inter = Inter({ subsets: ['latin'] })
 
@@ -17,7 +18,11 @@ export default function RootLayout ({ children }) {
         <header>
           <NavBar />
         </header>
-        <main className='container mx-auto px-5 mt-4'>{children}</main>
+        <main className='container mx-auto px-5 mt-4 relative flex justify-center items-center'>
+          <MobileLayout>
+            {children}
+          </MobileLayout>
+        </main>
       </body>
     </html>
   )

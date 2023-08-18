@@ -3,5 +3,18 @@
 @tailwind utilities;
 
 body {
-  @apply bg-gray-900 text-white;
+  @apply bg-white text-white;
+  
+
+  --primary: #f6e0c9;
+  --secondary: #a08b65;
+  --border: #4a4153;
+  --white: #fff;
+  --black: #000;
+  --antenna: #766e80;
+  --button: #201e1e;
+  --logo: #2f2b39;
+  --back-panel--start: #3c3642;
+  --back-panel--end: #93859a;
 }
+
