@@ -1,0 +1,11 @@
+.iconContainer svg:nth-child(2) {
+  display: none; 
+}
+
+.iconContainer:hover svg:nth-child(1) {
+  display: none;
+}
+
+.iconContainer:hover svg:nth-child(2) {
+  display: block;
+}
