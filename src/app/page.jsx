@@ -2,6 +2,12 @@
 
 import TaskCard from '@/components/TaskCard'
 import useHomePage from '@/hooks/useHomePage'
+import { Inter } from 'next/font/google'
+
+const inter = Inter({
+  subsets: ['latin'],
+  display: 'swap'
+})
 
 export default function HomePage () {
   const { tasks } = useHomePage()
@@ -9,7 +15,7 @@ export default function HomePage () {
   return (
     <div>
       <h1>Home Page</h1>
-      <div className='grid grid-cols-3 gap-2'>
+      <div className={`grid grid-rows-none gap-4 place-items-center ${inter.className}`}>
         {tasks.map((task) => {
           console.log(task.id)
           return (
