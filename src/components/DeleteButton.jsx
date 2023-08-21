@@ -9,9 +9,10 @@ export default function DeleteButton ({ actionOnClick }) {
 
   const handleClick = async () => {
     setLoading(true)
-    await actionOnClick()
-
-    setLoading(false)
+    actionOnClick().catch((error) => {
+      setLoading(false)
+      throw new Error(error)
+    })
   }
 
   return (
