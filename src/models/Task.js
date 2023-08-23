@@ -8,6 +8,10 @@ const taskSchema = new Schema(
       unique: [true, 'The title must be unique'],
       trim: true,
       maxlength: [50, 'The title must be less than 50 characters']
+    },
+    complete: {
+      type: Boolean,
+      default: false
     }
   },
   {
