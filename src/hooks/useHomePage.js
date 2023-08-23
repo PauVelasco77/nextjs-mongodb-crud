@@ -3,12 +3,21 @@ import useApi from './useApi'
 
 export default function useHomePage () {
   const [tasks, setTasks] = useState([])
-  const { getAllTasks, deleteTask, updateTask } = useApi()
+  const [errors, setErrors] = useState({
+    createTask: '',
+    updateTask: '',
+    deleteTask: ''
+  })
+  const { getAllTasks, deleteTask, updateTask, createTask } = useApi()
 
   const handleDeleteTask = (id) => {
     deleteTask(id).then(() => {
       setTasks(tasks.filter((task) => task.id !== id))
-    }).catch((error) => { throw new Error(error) })
+      setErrors({ ...errors, deleteTask: '' })
+    }).catch((error) => {
+      setErrors({ ...errors, deleteTask: error })
+      throw new Error(error)
+    })
   }
 
   const handleChangeStatus = (task) => {
@@ -19,9 +28,19 @@ export default function useHomePage () {
     }).catch((error) => { throw new Error(error) })
   }
 
+  const handleCreateTask = (title) => {
+    createTask({ title }).then((data) => {
+      setTasks([...tasks, data])
+      setErrors({ ...errors, createTask: '' })
+    }).catch((error) => {
+      setErrors({ ...errors, createTask: error })
+      throw new Error(error)
+    })
+  }
+
   useEffect(() => {
     getAllTasks().then((data) => setTasks(data)).catch((error) => { throw new Error(error) })
   }, [getAllTasks])
 
-  return { tasks, handleDeleteTask, handleChangeStatus }
+  return { tasks, handleDeleteTask, handleChangeStatus, handleCreateTask, errors }
 }
