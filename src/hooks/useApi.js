@@ -52,9 +52,11 @@ export default function useApi () {
 
       })
       const task = await res.json()
-      const mappedTaskFromApi = mapTaskFromApi(task)
-
+      if (task.error) {
+        throw new Error(task.message)
+      }
       if (res.status === 200) {
+        const mappedTaskFromApi = mapTaskFromApi(task)
         return mappedTaskFromApi
       }
     } catch (error) {
