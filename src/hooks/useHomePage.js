@@ -28,14 +28,15 @@ export default function useHomePage () {
     }).catch((error) => { throw new Error(error) })
   }
 
-  const handleCreateTask = (title) => {
-    createTask({ title }).then((data) => {
+  const handleCreateTask = async (title) => {
+    try {
+      const data = await createTask({ title })
       setTasks([...tasks, data])
       setErrors({ ...errors, createTask: '' })
-    }).catch((error) => {
-      setErrors({ ...errors, createTask: error })
-      throw new Error(error)
-    })
+    } catch (error) {
+      setErrors({ ...errors, createTask: error.message })
+      throw new Error(error.message)
+    }
   }
 
   useEffect(() => {
