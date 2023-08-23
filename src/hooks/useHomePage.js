@@ -21,7 +21,7 @@ export default function useHomePage () {
   }
 
   const handleChangeStatus = (task) => {
-    const newTask = { ...task, completed: !task.completed }
+    const newTask = { ...task, complete: !task.complete }
 
     updateTask(newTask).then(() => {
       setTasks(tasks.map((task) => task.id === newTask.id ? newTask : task))
