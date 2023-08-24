@@ -1,14 +1,28 @@
 import Task from '@/models/Task'
 import { connectDB } from '@/utils/mongoose'
+import { NextResponse } from 'next/server'
 
 export async function GET () {
-  await connectDB()
+  try {
+    await connectDB()
 
-  await Task.deleteMany({})
+    await Task.deleteMany({})
 
-  const newTask = new Task({
-    title: 'Learn React'
-  })
+    const newTask = new Task({
+      title: 'Learn React'
+    })
 
-  await newTask.save()
+    const savedTask = await newTask.save()
+    return NextResponse.json(savedTask)
+  } catch (error) {
+    return NextResponse.json(
+      {
+        error: true,
+        message: error.message
+      },
+      {
+        status: 400
+      }
+    )
+  }
 }
