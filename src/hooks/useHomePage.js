@@ -10,6 +10,10 @@ export default function useHomePage () {
   })
   const { getAllTasks, deleteTask, updateTask, createTask } = useApi()
 
+  useEffect(() => {
+    getAllTasks().then((data) => setTasks(data)).catch((error) => { throw new Error(error) })
+  }, [getAllTasks])
+
   const handleDeleteTask = (id) => {
     deleteTask(id).then(() => {
       setTasks(tasks.filter((task) => task.id !== id))
@@ -38,10 +42,6 @@ export default function useHomePage () {
       throw new Error(error.message)
     }
   }
-
-  useEffect(() => {
-    getAllTasks().then((data) => setTasks(data)).catch((error) => { throw new Error(error) })
-  }, [getAllTasks])
 
   return { tasks, handleDeleteTask, handleChangeStatus, handleCreateTask, errors }
 }
