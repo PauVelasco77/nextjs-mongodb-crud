@@ -43,5 +43,16 @@ export default function useHomePage () {
     }
   }
 
-  return { tasks, handleDeleteTask, handleChangeStatus, handleCreateTask, errors }
+  const handleUpdateTask = async (updatedTask) => {
+    try {
+      const data = await updateTask(updatedTask)
+      setTasks(tasks.map((task) => task.id === data.id ? data : task))
+      setErrors({ ...errors, updateTask: '' })
+    } catch (error) {
+      setErrors({ ...errors, updateTask: error.message })
+      throw new Error(error.message)
+    }
+  }
+
+  return { tasks, handleDeleteTask, handleChangeStatus, handleCreateTask, handleUpdateTask, errors }
 }
