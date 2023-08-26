@@ -5,7 +5,7 @@ import { capitalizeFirstLetter } from '@/utils/capitalize'
 import debounce from 'just-debounce-it'
 import { TASK } from '@/constants'
 
-export default function TaskCard ({ taskData, actionOnDelete, actionOnComplete, actionOnUpdate }) {
+export default function TaskCard ({ taskData, actionOnDelete, actionOnUpdate }) {
   const [task, setTask] = useState({
     ...taskData,
     title: capitalizeFirstLetter(taskData.title)

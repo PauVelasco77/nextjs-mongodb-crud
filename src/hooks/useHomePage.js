@@ -24,14 +24,6 @@ export default function useHomePage () {
     })
   }
 
-  const handleChangeStatus = (task) => {
-    const newTask = { ...task, complete: !task.complete }
-
-    updateTask(newTask).then(() => {
-      setTasks(tasks.map((task) => task.id === newTask.id ? newTask : task))
-    }).catch((error) => { throw new Error(error) })
-  }
-
   const handleCreateTask = async (title) => {
     try {
       const data = await createTask({ title })
@@ -54,5 +46,5 @@ export default function useHomePage () {
     }
   }
 
-  return { tasks, handleDeleteTask, handleChangeStatus, handleCreateTask, handleUpdateTask, errors }
+  return { tasks, handleDeleteTask, handleCreateTask, handleUpdateTask, errors }
 }
