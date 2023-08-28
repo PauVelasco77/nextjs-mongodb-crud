@@ -1,5 +1,6 @@
 import { useEffect, useState } from 'react'
 import useApi from './useApi'
+import { mapTaskFromApi } from '@/utils/mapApiTasks'
 
 export default function useHomePage () {
   const [tasks, setTasks] = useState(null)
@@ -38,7 +39,8 @@ export default function useHomePage () {
   const handleUpdateTask = async (updatedTask) => {
     try {
       const data = await updateTask(updatedTask)
-      setTasks(tasks.map((task) => task.id === data.id ? data : task))
+      const mappedTask = mapTaskFromApi(data)
+      setTasks(tasks.filter((task) => task.id !== mappedTask.id).concat(mappedTask))
       setErrors({ ...errors, updateTask: '' })
     } catch (error) {
       setErrors({ ...errors, updateTask: error.message })
