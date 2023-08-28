@@ -18,7 +18,7 @@ export default function TaskCard ({ taskData, actionOnDelete, actionOnUpdate }) 
 
   const debouncedUpdateTask = useCallback(debounce(task => {
     actionOnUpdate(task)
-  }, 300), [])
+  }, 300), [actionOnUpdate])
 
   const handleComplete = (e) => {
     const newTask = { ...task, [e.target.name]: e.target.checked }
