@@ -2,7 +2,7 @@ import { useEffect, useState } from 'react'
 import useApi from './useApi'
 
 export default function useHomePage () {
-  const [tasks, setTasks] = useState([])
+  const [tasks, setTasks] = useState(null)
   const [errors, setErrors] = useState({
     createTask: '',
     updateTask: '',

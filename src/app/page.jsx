@@ -20,7 +20,7 @@ export default function HomePage () {
       <h1>Home Page</h1>
       <CreateTask actionOnCreate={handleCreateTask} errorMessage={errors.createTask} />
       <div className={`grid grid-rows-none gap-4 place-items-center ${inter.className} w-full`}>
-        {tasks.length === 0 && <h2 className='text-2xl text-gray-100'>No tasks yet</h2>}
+        {tasks?.length === 0 && <h2 className='text-2xl text-gray-100'>No tasks yet</h2>}
         {tasks?.map((task) =>
           <Suspense fallback={<LoadingTask />} key={task.id}>
             <LazyTask taskData={task} key={task.id} actionOnUpdate={handleUpdateTask} actionOnDelete={handleDeleteTask} />
