@@ -14,10 +14,13 @@ export default function RootLayout ({ children }) {
     <html lang='en'>
       <title>Todo list + MongoDB API</title>
       <body className={inter.className}>
-        <header>
+        <header className='h-full bg-gray-700'>
           <NavBar />
         </header>
-        <main className='container mx-auto px-5 mt-4 max-w-3xl'>{children}</main>
+        <div className='bg-gray-700 absolute h-[50px] w-screen' />
+        <main className='container mx-auto px-5 mt-4 max-w-3xl relative'>
+          {children}
+        </main>
       </body>
     </html>
   )
