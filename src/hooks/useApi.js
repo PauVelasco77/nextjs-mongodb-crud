@@ -76,13 +76,14 @@ export default function useApi () {
         }
 
       })
-      await res.json()
+      const formatRes = await res.json()
 
       if (res.status === 200) {
         return true
       }
+      throw new Error(formatRes.message)
     } catch (error) {
-      throw new Error(error)
+      throw new Error(error.message)
     }
   }, [])
 
