@@ -17,7 +17,9 @@ export default function TaskCard ({ taskData, actionOnDelete, actionOnUpdate }) 
   }
 
   const debouncedUpdateTask = useCallback(debounce(task => {
-    actionOnUpdate(task)
+    actionOnUpdate(task).catch((error) => {
+      setError(error.message)
+    })
   }, 300), [actionOnUpdate])
 
   const handleComplete = (e) => {

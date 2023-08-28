@@ -45,15 +45,27 @@ export async function PUT (req, { params }) {
 
     return NextResponse.json(updatedTask)
   } catch (error) {
-    return NextResponse.json(
-      {
-        error: true,
-        message: error.message
-      },
-      {
-        status: 400
-      }
-    )
+    if (error.name === 'MongoServerError' && error.code === 11000) {
+      return NextResponse.json(
+        {
+          error: true,
+          message: 'The title must be unique for every task'
+        },
+        {
+          status: 400
+        }
+      )
+    } else {
+      return NextResponse.json(
+        {
+          error: true,
+          message: error.message
+        },
+        {
+          status: 400
+        }
+      )
+    }
   }
 }
 
