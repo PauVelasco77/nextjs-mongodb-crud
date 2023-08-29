@@ -14,7 +14,7 @@ export default function RootLayout ({ children }) {
       <title>Todo list + MongoDB API</title>
       <body className={inter.className}>
         <header className='h-full bg-gray-700 flex justify-center'>
-          <h1 className='text-4xl font-extrabold p-4'><span className='text-secondary1'>to</span> <span className='text-secondary1'>do</span> + <span className='text-white'>mongo</span><span className='text-green-400'>DB</span></h1>
+          <h1 className='text-4xl font-extrabold p-4'><span className='text-secondary2'>to</span> <span className='text-secondary2'>do</span> + <span className='text-white'>mongo</span><span className='text-green-400'>DB</span></h1>
         </header>
         <div className='bg-gray-700 absolute h-[50px] w-screen' />
         <main className='container mx-auto px-5 mt-4 max-w-3xl relative'>
