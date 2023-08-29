@@ -19,7 +19,6 @@ export default function HomePage () {
   return (
     <div className='gap-7 flex flex-col'>
       <header>
-        <h1>Home Page</h1>
         <CreateTask actionOnCreate={handleCreateTask} errorMessage={errors.createTask} />
         <TasksInfo tasks={tasks} />
       </header>
