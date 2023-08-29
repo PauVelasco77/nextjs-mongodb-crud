@@ -40,7 +40,11 @@ export default function useHomePage () {
     try {
       const data = await updateTask(updatedTask)
       const mappedTask = mapTaskFromApi(data)
-      setTasks(tasks.filter((task) => task.id !== mappedTask.id).concat(mappedTask))
+      console.log(mappedTask)
+      setTasks(tasks.filter((task) => {
+        if (task.id !== mappedTask.id) return mappedTask
+        return task
+      }))
       setErrors({ ...errors, updateTask: '' })
     } catch (error) {
       setErrors({ ...errors, updateTask: error.message })
