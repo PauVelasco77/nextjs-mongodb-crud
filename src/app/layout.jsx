@@ -1,4 +1,3 @@
-import NavBar from '@/components/NavBar'
 import './globals.css'
 import { Inter } from 'next/font/google'
 
@@ -15,7 +14,7 @@ export default function RootLayout ({ children }) {
       <title>Todo list + MongoDB API</title>
       <body className={inter.className}>
         <header className='h-full bg-gray-700'>
-          <NavBar />
+          <h1>Title</h1>
         </header>
         <div className='bg-gray-700 absolute h-[50px] w-screen' />
         <main className='container mx-auto px-5 mt-4 max-w-3xl relative'>
