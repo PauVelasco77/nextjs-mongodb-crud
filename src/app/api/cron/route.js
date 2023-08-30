@@ -2,7 +2,15 @@ import Task from '@/models/Task'
 import { connectDB } from '@/utils/mongoose'
 import { NextResponse } from 'next/server'
 
-export async function GET () {
+export async function GET (req, { params }) {
+  // This is a cron job, so we don't want to run it in the build process
+  if (process.env.BUILD_PROCESS) {
+    return NextResponse.json({
+      status: 401,
+      error: 'Unauthorized'
+    })
+  }
+
   try {
     await connectDB()
 
