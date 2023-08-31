@@ -4,7 +4,7 @@
   "private": true,
   "scripts": {
     "dev": "next dev",
-    "build": "next build",
+    "build": "cross-env BUILD_PROCESS=true next build",
     "start": "next start",
     "lint": "next lint"
   },
@@ -15,6 +15,7 @@
     "@mui/icons-material": "^5.14.3",
     "@mui/material": "^5.14.5",
     "autoprefixer": "10.4.14",
+    "cross-env": "^7.0.3",
     "eslint": "8.46.0",
     "eslint-config-next": "13.4.12",
     "just-debounce-it": "^3.2.0",
