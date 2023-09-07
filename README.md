@@ -1,43 +1,112 @@
-This is a [Next.js](https://nextjs.org/) project bootstrapped with [`create-next-app`](https://github.com/vercel/next.js/tree/canary/packages/create-next-app).
+# [Next13-MongoDB-CRUD](https://nextjs-mongodb-crud-pau-velasco.vercel.app/) 
 
-## Getting Started
+The nextjs-mongodb-crud project is a web application that utilizes NextJS 13 and MongoDB technologies to create, update, read, and delete data from a database. The application provides a user-friendly interface for users to interact by creating, editing, or deleting tasks.
 
-First, run the development server:
+For the project, the built-in API that Next allows creating has been used as the backend of the application. It also features a cron job that clears the database data once a day to provide some default tasks.
+
+The project is deployed on Vercel, and you can access it at https://nextjs-mongodb-crud-pau-velasco.vercel.app/.
+
+<div align="center" style="padding: 40px;">    
+    <img src="src/assets/todo.png" alt="Todo App" width="400" >
+</div>
+
+
+## Table of Contents
+
+- [Features](#features)
+- [Installation](#installation)
+- [Usage](#usage)
+- [Directory](#directory)
+
+## Features
+
+- Add, edit, and remove tasks.
+- Mark tasks as completed or uncompleted.
+- Built with NextJS and TypeScript for type-safe development.
+
+## Installation
+
+Before you start, make sure you have [Node.js](https://nodejs.org/) and [Yarn](https://yarnpkg.com/) installed.
+
+1. Clone this repository to your local machine:
 
 ```bash
-npm run dev
-# or
-yarn dev
-# or
-pnpm dev
+git clone https://github.com/PauVelasco77/nextjs-mongodb-crud
+cd nextjs-mongodb-crud
+``````
+
+2. Install the project dependencies:
+
+```bash
+yarn
 ```
 
-Open [http://localhost:3000](http://localhost:3000) with your browser to see the result.
+## Usage
 
-You can start editing the page by modifying `app/page.js`. The page auto-updates as you edit the file.
+1. To start the development server, use the following command:
 
-This project uses [`next/font`](https://nextjs.org/docs/basic-features/font-optimization) to automatically optimize and load Inter, a custom Google Font.
+```bash
+yarn dev
+```
 
-## Learn More
+This will start the development server at http://localhost:5173.
 
-To learn more about Next.js, take a look at the following resources:
+To build the production-ready version, run:
 
-- [Next.js Documentation](https://nextjs.org/docs) - learn about Next.js features and API.
-- [Learn Next.js](https://nextjs.org/learn) - an interactive Next.js tutorial.
+```bash
+yarn build
+```
 
-You can check out [the Next.js GitHub repository](https://github.com/vercel/next.js/) - your feedback and contributions are welcome!
 
-## Deploy on Vercel
+## Directory
 
-The easiest way to deploy your Next.js app is to use the [Vercel Platform](https://vercel.com/new?utm_medium=default-template&filter=next.js&utm_source=create-next-app&utm_campaign=create-next-app-readme) from the creators of Next.js.
-
-Check out our [Next.js deployment documentation](https://nextjs.org/docs/deployment) for more details.
-
-## Data
-
-- Task
-```{
-    id: string,
-    title: string,
-    status: boolean,
-}```
+.
+├── app
+│   ├── api
+│   │   ├── cron
+│   │   │   └── route.js
+│   │   ├── ping
+│   │   │   └── route.js
+│   │   ├── refresh
+│   │   │   └── route.js
+│   │   └── tasks
+│   │       ├── [id]
+│   │       │   └── route.js
+│   │       └── route.js
+│   ├── favicon.ico
+│   ├── globals.css
+│   ├── layout.jsx
+│   ├── login
+│   ├── not-found.jsx
+│   ├── page.jsx
+│   └── tasks
+│       ├── [id]
+│       │   └── page.jsx
+│       └── new
+│           └── page.jsx
+├── assets
+│   └── todo.png
+├── components
+│   ├── CheckButton
+│   │   ├── CheckButton.jsx
+│   │   └── CheckButton.module.css
+│   ├── CreateTask
+│   │   └── CreateTask.jsx
+│   ├── DeleteButton.jsx
+│   ├── LoadingTask
+│   │   └── LoadingTask.jsx
+│   ├── TaskCard.jsx
+│   └── TasksInfo
+│       └── TasksInfo.jsx
+├── constants.js
+├── hooks
+│   ├── useApi.js
+│   └── useHomePage.js
+├── middleware.js
+├── models
+│   └── Task.js
+└── utils
+    ├── capitalize.js
+    ├── mapApiTasks.js
+    ├── mongoose.js
+    └── sortTasksByComplete.js
