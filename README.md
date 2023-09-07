@@ -60,6 +60,7 @@ yarn build
 
 ## Directory
 
+```bash
 .
 ├── app
 │   ├── api
@@ -110,3 +111,4 @@ yarn build
     ├── mapApiTasks.js
     ├── mongoose.js
     └── sortTasksByComplete.js
+```
