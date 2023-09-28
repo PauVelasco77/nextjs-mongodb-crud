@@ -1,7 +1,7 @@
 {
     "crons": [
         {
-            "path": "/api/cron?key=nextjs-mongodb-crud",
+            "path": "/api/cron",
             "schedule": "0 16 * * *"
         }
     ]
