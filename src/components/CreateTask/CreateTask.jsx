@@ -38,7 +38,7 @@ export default function CreateTask ({ actionOnCreate }) {
       <form className='w-full gap-2 flex'>
         <input onChange={handleChange} value={title} type='text' autoFocus placeholder='Add new task' className='w-4/5 bg-gray-500 rounded-lg text-gray-100 text-base placeholder:text-gray-300 p-4 border-gray-700 border-2 outline-none transition-colors duration-300 hover:border-secondary2 focus:border-secondary2' />
         <button onClick={handleSubmit} className='w-1/5 bg-secondary2 h-full p-4 rounded-lg border-gray-700 border-2 flex items-center justify-center transition-colors duration-200 hover:border-secondary2'>
-          <span>Create</span>
+          <span className='hidden md:block'>Create</span>
           <AddIcon />
         </button>
       </form>
