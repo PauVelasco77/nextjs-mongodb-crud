@@ -2,6 +2,8 @@ import Task from '@/models/Task'
 import { connectDB } from '@/utils/mongoose'
 import { NextResponse } from 'next/server'
 
+export const revalidate = 0
+
 export async function GET (req, { params }) {
   try {
     await connectDB()
