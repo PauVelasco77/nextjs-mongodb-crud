@@ -49,7 +49,7 @@ yarn
 yarn dev
 ```
 
-This will start the development server at http://localhost:5173.
+This will start the development server at http://localhost:3000.
 
 To build the production-ready version, run:
 
